@@ -44,4 +44,3 @@ jobs:
       working-directory: ./taskmanager
       run: |
         python ./manager.py test
-      working-directory: ./taskmanager
