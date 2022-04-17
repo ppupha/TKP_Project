@@ -3,16 +3,16 @@ name: Django CI
 on:
   push:
     branches:
-        - main
-        - develop
+      - main
+      - develop
+      - feature/3-настроить-cicd
   pull_request:
     branches:
-        - main
-        - develop
+      - main
+      - develop
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
