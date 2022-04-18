@@ -42,4 +42,4 @@ jobs:
     - name: Run AutoTests
       working-directory: ./taskmanager
       run: |
-        python ./manager.py test
+        python manager.py test
