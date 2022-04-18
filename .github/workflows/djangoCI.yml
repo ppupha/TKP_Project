@@ -39,7 +39,9 @@ jobs:
       working-directory: ./taskmanager
       run: |
         python -m pip install coverage
+        python -m coverage run manage.py test
+        python -m coverage report
     - name: Run AutoTests
       working-directory: ./taskmanager
       run: |
-        python manager.py test
+        python manage.py test
