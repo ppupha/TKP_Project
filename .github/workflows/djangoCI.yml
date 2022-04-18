@@ -36,12 +36,12 @@ jobs:
         flake8
       working-directory: ./taskmanager/taskmanager
     - name: Coverage Report
+      working-directory: ./taskmanager
       run: |
         python -m pip install coverage
         python -m coverage run ./manager.py test
         python -m coverage report
-      working-directory: ./taskmanager
-    - name: Run Tests
+    - name: Run AutoTests
       working-directory: ./taskmanager
       run: |
         python ./manager.py test
