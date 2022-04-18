@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+{% csrf_token %}
+<div style="background-color : #F8F9FA; border-radius : 5px; padding:0% 5%">
+    <p style="font-size:2em; font-family:freestyle script">Hi <span style="color:#4D8096">{{ user.username }}</span>,</p>
+    <p style="color:black">It is our pleasure to have you joining us.</p>
+    <p style="color:black">Please click on the button to confirm your registration.</p>
+    <form action="http://{{ domain }}{% url 'user:activate' uidb64=uid token=token %}">
+        <button style="width:200px; height:30px; background-color:#DC3545 ; color:white; align:center; border-radius:5px; border:none" type="submit">Activate</button>
+    </form>
+    <p style="color:black">Sincerely,</p>
+    <p style="font-size:1.5em; color:#4D8096; font-family:freestyle script">Up-To-Date</p>
+</div>
+
+
+</body>
+</html>
