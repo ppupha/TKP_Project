@@ -3,6 +3,8 @@ from django.views import View
 from myuser.forms import UserForm
 from django.contrib.auth import views as auth_views
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 
 
