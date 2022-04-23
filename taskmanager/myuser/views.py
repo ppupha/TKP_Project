@@ -22,7 +22,7 @@ class SignupView(View):
     """
     def get(self, request):
         user_form = UserForm()
-        return render(request, 'signup.html', {'user_form': user_form, 'success': 0})
+        return render(request, 'myuser/signup.html', {'user_form': user_form, 'success': 0})
 
     def post(self, request):
         user_form = UserForm(request.POST)
@@ -52,6 +52,6 @@ class SignupView(View):
             email.attach_alternative(html_content, 'text/html')
             email.send()
             '''
-            return render(request, 'signup.html', {'user_form': user_form, 'success': 1,})
+            return render(request, 'myuser/signup.html', {'user_form': user_form, 'success': 1,})
 
-        return render(request, 'signup.html', {'user_form': user_form, 'success': 0, })
+        return render(request, 'myuser/signup.html', {'user_form': user_form, 'success': 0, })
