@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title%}Sign up{% endblock%}
+{% block content %}
+<div class="container" style="margin-top:8%; padding:0% 15%" >
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+        <h2 class="card-title mt-3 text-center" style="color: #4D8096; font-size: 5em; font-family:freestyle script">Registration</h2>
+        <form method="POST">
+        {% csrf_token %}
+        {% if success %}
+            <h2 class="mt-3 text-center" style="color: #4D8096; font-size: 1.5em; font-family:times new roman">
+            Please confirm your email address to complete the registration
+            </h2>
+        {% else %}
+            {% for field in user_form %}
+            <div class="form-group input-group">
+		    <div class="input-group-prepend">
+		        <span style="color: #4D8096"  class="input-group-text">
+                    {% if field.name == "username" %}
+                        <i class="fa fa-user"></i>
+                    {% elif field.name == "email" %}
+                        <i class="fa fa-envelope"></i>
+                    {% elif field.name == "password1" %}
+                        <i class="fa fa-lock"></i>
+                    {% elif field.name == "password2" %}
+                        <i class="fa fa-lock"></i>
+                    {% endif %}
+                </span>
+            </div>
+            {{ field }}
+            </div>
+            {% for error in field.errors %}
+            <p style="color: #4D8096">{{ error }}</p>
+            {% endfor %}
+            {% endfor %}
+            <div class="form-group">
+                <button type="submit" class="btn btn-block" style="background-color:#4D8096; color:white">Create Account</button>
+            </div>
+            <p class="text-center">Have an account? <a href="../login/">Log In</a> </p>
+        {% endif %}
+        </form>
+        </article>
+    </div>
+</div>
+{% endblock %}
