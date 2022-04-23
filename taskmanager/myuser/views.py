@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.views import View
 from myuser.forms import UserForm
+from django.contrib.auth import views as auth_views
+from django.contrib.sites.shortcuts import get_current_site
+
+
 
 
 
@@ -48,6 +52,6 @@ class SignupView(View):
             email.attach_alternative(html_content, 'text/html')
             email.send()
             '''
-            return render(request, 'user/signup.html', {'user_form': user_form, 'success': 1,})
+            return render(request, 'signup.html', {'user_form': user_form, 'success': 1,})
 
-        return render(request, 'user/signup.html', {'user_form': user_form, 'success': 0, })
+        return render(request, 'signup.html', {'user_form': user_form, 'success': 0, })
