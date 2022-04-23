@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from myuser.forms import UserForm
+from django.template.loader import get_template
+
 from django.contrib.auth import views as auth_views
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import authenticate, login, logout
@@ -78,7 +80,7 @@ class LoginClass(View):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect('/')
+                return redirect('user:index')
         else:
             user = User.objects.filter(username=user_name)
             return render(request, 'myuser/login.html', {'user': user, 'mode': 1})
