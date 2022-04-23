@@ -13,7 +13,6 @@ class IndexView(View):
     def get(self, request):
         return render(request, 'index.html')
 
-
 class SignupView(View):
     """
     Load signup page
@@ -55,3 +54,29 @@ class SignupView(View):
             return render(request, 'myuser/signup.html', {'user_form': user_form, 'success': 1,})
 
         return render(request, 'myuser/signup.html', {'user_form': user_form, 'success': 0, })
+
+class LoginClass(View):
+    """
+    Load login page
+    If user is authenticated then redirect to task:projects page
+    else return the corresponding errors
+    - Password is not correct
+    - Account is inactive
+    - Username does not exist
+    """
+    def get(self, request):
+        return render(request, 'myuser/login.html', {'mode': 0})
+
+    def post(self, request):
+        user_name = request.POST.get('username')
+        pass_word = request.POST.get('password')
+        # return a user if both username and password are valid
+
+        user = authenticate(username=user_name, password=pass_word)
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect('/')
+        else:
+            user = User.objects.filter(username=user_name)
+            return render(request, 'myuser/login.html', {'user': user, 'mode': 1})
