@@ -55,3 +55,41 @@ def Delete_Project(request, id):
        return HttpResponse("ERROR: PROJECT NOT FOUND")
 
 
+class  MyProject(LoginRequiredMixin, APIView):
+
+    # if request.method == "GET"
+    def get(self, request, id):
+        project = Project.objects.get(id = id)
+        tasks = list(project.task_set.all())
+        taskforms = []
+        modes = []
+        for task in tasks:
+            data = {'title': task.title,
+                    'description': task.description,
+                    'deadline': task.deadline,
+                    }
+            taskform = TaskForm(data)
+            taskforms.append(taskform)
+            # Get color for task
+            if task.done:# task is completed
+                modes.append("#28a745")#green
+            elif task.deadline - datetime.now(timezone.utc) - timedelta(hours = 3) > timedelta(days = 3): # > 3 days from deadline 
+                modes.append("#4d8096")#blue
+            elif task.deadline - datetime.now(timezone.utc) - timedelta(hours = 3) > timedelta(0): # > deadline
+                modes.append("#FFC107") #yellow
+            else: # < 3 days from deadline
+                modes.append("#DC3545") #red
+        # create notifications
+        make_noti(request)
+        tsks = Task.objects.filter(project__in = list(request.user.project_set.all()))
+        notis = Notification.objects.filter(task__in = list(tsks)).order_by('-id')
+        for noti in notis:
+            if noti.task.project.id == project.id:
+                noti.actived = True
+                noti.save()
+        notic_count = len(list(Notification.objects.filter(actived = False)))
+        
+        tasks = [{'id': tasks[i].id, 'taskmodel': tasks[i], 'taskform': taskforms[i], 'mode': modes[i]} for i in range(len(tasks))]
+        data = {"project": project, "tasks": tasks, "taskform": TaskForm, 'notis': notis, 'notic_count': notic_count}
+
+        return render(request, "task/project.html", data)
