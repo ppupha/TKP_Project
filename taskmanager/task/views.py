@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Project, Task#, Notification
+from .models import Project, Task, Notification
 from django.views.generic import DetailView, ListView, DeleteView
 from django.views import View
 from .forms import ProjectForm, TaskForm
@@ -10,18 +10,48 @@ from datetime import timedelta, datetime, timezone
 from rest_framework.views import APIView
 
 
+def make_noti(request):
+    count = 0
+    # get all projects of a users
+    projects = request.user.project_set.all()
+    for project in projects:
+        # get all task of a projects
+        tasks = project.task_set.all()
+        for task in tasks:
+            if not task.done:
+                count += 1
+                # create a new Model
+                noti = Notification()
+                noti.task = task
+                # if closed to deadline 3 day
+                if (task.deadline - datetime.now(timezone.utc) - timedelta(hours=3) < timedelta(0)) and (
+                        task.noti[0] == '0'):
+                    noti.content = 'The deadline is already over'
+                    noti.save()
+                    task.noti = '1{}{}'.format(task.noti[1], task.noti[2])
+                # if out ò deadline
+                elif (timedelta(0) < task.deadline - datetime.now(timezone.utc) - timedelta(hours=3) < timedelta(
+                        days=3)) and (task.noti[1] == '0'):
+
+                    noti.content = '3 day left '
+                    noti.save()
+                    task.noti = task.noti[0] + '1' + task.noti[2]
+                task.save()
+    return count
+
+
 class MyProjects(LoginRequiredMixin, APIView):
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
 
     # if request.method == "GẺT"
-    def get(self, request, str = 'id'):
+    def get(self, request, str='id'):
         projects = request.user.project_set.all().order_by(str)
         # get all notification of user
         make_noti(request)
-        tasks = Task.objects.filter(project__in = list(projects))
-        notis = Notification.objects.filter(task__in = list(tasks)).order_by('-id')
-        notic_count = len(list(Notification.objects.filter(actived = False)))
+        tasks = Task.objects.filter(project__in=list(projects))
+        notis = Notification.objects.filter(task__in=list(tasks)).order_by('-id')
+        notic_count = len(list(Notification.objects.filter(actived=False)))
         data = {"projects": projects, "projectform": ProjectForm, "notis": notis, "notic_count": notic_count}
         return render(request, "task/projects.html", data)
 
@@ -47,19 +77,19 @@ class MyProjects(LoginRequiredMixin, APIView):
 def Delete_Project(request, id):
     try:
         # get project need delete
-        project = Project.objects.get(id =id)
+        project = Project.objects.get(id=id)
         if request.method == 'GET':
             project.delete()
             return HttpResponseRedirect("/projects/")
     except:
-       return HttpResponse("ERROR: PROJECT NOT FOUND")
+        return HttpResponse("ERROR: PROJECT NOT FOUND")
 
 
-class  MyProject(LoginRequiredMixin, APIView):
+class MyProject(LoginRequiredMixin, APIView):
 
     # if request.method == "GET"
     def get(self, request, id):
-        project = Project.objects.get(id = id)
+        project = Project.objects.get(id=id)
         tasks = list(project.task_set.all())
         taskforms = []
         modes = []
@@ -71,35 +101,37 @@ class  MyProject(LoginRequiredMixin, APIView):
             taskform = TaskForm(data)
             taskforms.append(taskform)
             # Get color for task
-            if task.done:# task is completed
-                modes.append("#28a745")#green
-            elif task.deadline - datetime.now(timezone.utc) - timedelta(hours = 3) > timedelta(days = 3): # > 3 days from deadline 
-                modes.append("#4d8096")#blue
-            elif task.deadline - datetime.now(timezone.utc) - timedelta(hours = 3) > timedelta(0): # > deadline
-                modes.append("#FFC107") #yellow
-            else: # < 3 days from deadline
-                modes.append("#DC3545") #red
+            if task.done:  # task is completed
+                modes.append("#28a745")  # green
+            elif task.deadline - datetime.now(timezone.utc) - timedelta(hours=3) > timedelta(
+                    days=3):  # > 3 days from deadline
+                modes.append("#4d8096")  # blue
+            elif task.deadline - datetime.now(timezone.utc) - timedelta(hours=3) > timedelta(0):  # > deadline
+                modes.append("#FFC107")  # yellow
+            else:  # < 3 days from deadline
+                modes.append("#DC3545")  # red
         # create notifications
         make_noti(request)
-        tsks = Task.objects.filter(project__in = list(request.user.project_set.all()))
-        notis = Notification.objects.filter(task__in = list(tsks)).order_by('-id')
+        tsks = Task.objects.filter(project__in=list(request.user.project_set.all()))
+        notis = Notification.objects.filter(task__in=list(tsks)).order_by('-id')
         for noti in notis:
             if noti.task.project.id == project.id:
                 noti.actived = True
                 noti.save()
-        notic_count = len(list(Notification.objects.filter(actived = False)))
-        
-        tasks = [{'id': tasks[i].id, 'taskmodel': tasks[i], 'taskform': taskforms[i], 'mode': modes[i]} for i in range(len(tasks))]
+        notic_count = len(list(Notification.objects.filter(actived=False)))
+
+        tasks = [{'id': tasks[i].id, 'taskmodel': tasks[i], 'taskform': taskforms[i], 'mode': modes[i]} for i in
+                 range(len(tasks))]
         data = {"project": project, "tasks": tasks, "taskform": TaskForm, 'notis': notis, 'notic_count': notic_count}
 
         return render(request, "task/project.html", data)
-        
+
     # if method == "POST"
     def post(self, request, id):
         f = TaskForm(request.POST)
         if f.is_valid():
             task = Task()
-            task.project = Project.objects.get(id = id)
+            task.project = Project.objects.get(id=id)
             task.title = f.cleaned_data['title']
             task.description = f.cleaned_data['description']
             task.deadline = f.cleaned_data['deadline']
@@ -110,11 +142,12 @@ class  MyProject(LoginRequiredMixin, APIView):
             link = "/project/{}".format(id)
             return HttpResponseRedirect(link)
 
+
 @decorators.login_required
 def Delete_Task(request, id):
     try:
         if request.method == 'GET':
-            task = Task.objects.get(id = id)
+            task = Task.objects.get(id=id)
             # delete task
             task.delete()
             link = '/project/{}'.format(task.project.id)
@@ -122,13 +155,14 @@ def Delete_Task(request, id):
     except:
         return HttpResponse("ERROR: TASK NOT FOUND")
 
+
 @decorators.login_required
 def Save_Task(request, id):
     if request.method == "POST":
         # get data from request
         f = TaskForm(request.POST)
         if f.is_valid():
-            task = Task.objects.get(id = id)
+            task = Task.objects.get(id=id)
             task.title = f.cleaned_data['title']
             task.description = f.cleaned_data['description']
             task.deadline = f.cleaned_data['deadline']
@@ -139,11 +173,12 @@ def Save_Task(request, id):
     else:
         return HttpResponse("ERROR: TASK NOT FOUND")
 
+
 @decorators.login_required
 def Done_Task(request, id):
     try:
         if request.method == "GET":
-            task = Task.objects.get(id = id)
+            task = Task.objects.get(id=id)
             # task had been done
             task.done = True
             task.completed_day = datetime.now()
