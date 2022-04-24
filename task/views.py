@@ -122,3 +122,19 @@ def Delete_Task(request, id):
     except:
         return HttpResponse("ERROR: TASK NOT FOUND")
 
+@decorators.login_required
+def Save_Task(request, id):
+    if request.method == "POST":
+        # get data from request
+        f = TaskForm(request.POST)
+        if f.is_valid():
+            task = Task.objects.get(id = id)
+            task.title = f.cleaned_data['title']
+            task.description = f.cleaned_data['description']
+            task.deadline = f.cleaned_data['deadline']
+            task.noti = '000'
+            task.save()
+            link = "/project/{}".format(task.project.id)
+            return HttpResponseRedirect(link)
+    else:
+        return HttpResponse("ERROR: TASK NOT FOUND")
