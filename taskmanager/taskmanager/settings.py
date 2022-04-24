@@ -125,8 +125,6 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 MEDIA_URL = '/media/'
 LOGIN_URL = '/login/'
 
-
-
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     EMAIL_HOST = 'localhost'
