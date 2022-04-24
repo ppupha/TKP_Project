@@ -15,6 +15,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 
 from django.core.mail import EmailMultiAlternatives
+from django.contrib.auth.decorators import login_required
 
 from .tokens import account_activation_token
 
@@ -22,6 +23,12 @@ from .tokens import account_activation_token
 class IndexView(View):
     def get(self, request):
         return render(request, 'index.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    request.session.flush()
+    return redirect('user:index')
 
 class SignupView(View):
     """
