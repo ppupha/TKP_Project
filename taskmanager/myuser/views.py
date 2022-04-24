@@ -14,13 +14,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 
+from django.core.mail import EmailMultiAlternatives
 
 from .tokens import account_activation_token
-
-
-
-
-
 
 # Create your views here.
 class IndexView(View):
@@ -49,6 +45,7 @@ class SignupView(View):
             current_site = get_current_site(request)
             mail_subject = 'Active your account.'
             to_email = user_form.cleaned_data.get('email')
+            from_email = "nguyennsangqh@gmail.com"
             html_content = get_template('registrations/acc_active_email.html').render({
                 'user': user,
                 'domain': current_site.domain,
@@ -57,14 +54,14 @@ class SignupView(View):
                 # make a token that can be used once to active user
                 'token': account_activation_token.make_token(user),
             })
-            '''
+
             email = EmailMultiAlternatives(
                 mail_subject, '', to=[to_email]
             )
             # attach a HTML formatted email
             email.attach_alternative(html_content, 'text/html')
             email.send()
-            '''
+
             return render(request, 'myuser/signup.html', {'user_form': user_form, 'success': 1,})
 
         return render(request, 'myuser/signup.html', {'user_form': user_form, 'success': 0, })
@@ -114,3 +111,26 @@ class ActivateView(View):
         else:
             return render(request, 'registrations/acc_active_invalid.html')
 
+class PasswordChangeView_(auth_views.PasswordChangeView):
+    success_url = reverse_lazy('myuser:password_change_done')
+    template_name = 'registrations/password_change_form.html'
+
+class PasswordChageDoneView_(auth_views.PasswordChangeDoneView):
+    template_name = 'registrations/password_change_done.html'
+
+class PasswordResetView_(auth_views.PasswordResetView):
+    subject_template_name = 'registrations/password_reset_subject.txt'
+    template_name = 'registrations/password_reset_form.html'
+    success_url = reverse_lazy('myuser:password_reset_done')
+    email_template_name = 'registrations/password_reset_email.html'
+    html_email_template_name = email_template_name
+
+class PasswordResetDoneView_(auth_views.PasswordResetDoneView):
+    template_name = 'registrations/password_reset_done.html'
+
+class PasswordResetConfirmView_(auth_views.PasswordResetConfirmView):
+    template_name = 'registrations/password_reset_confirm.html'
+    success_url = reverse_lazy('myuser:password_reset_complete')
+
+class PasswordResetCompleteView_(auth_views.PasswordResetCompleteView):
+    template_name = 'registrations/password_reset_complete.html'
