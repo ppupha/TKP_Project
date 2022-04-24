@@ -38,7 +38,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container">
        <div class="navbar-brand">
-           <a class="nav-link" style="color:black" href="">Up-to-date</a>
+           <a class="nav-link" style="color:black" href="{% url 'user:index' %}">Up-to-date</a>
        </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -46,11 +46,11 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="">Log in</a>
+          <a class="nav-link" href="{% url 'myuser:login'%}">Log in</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="">Sign up</a>
+          <a class="nav-link" href="{% url 'myuser:signup'%}">Sign up</a>
         </li>
 
         <li class="nav-item">
