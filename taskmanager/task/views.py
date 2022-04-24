@@ -10,6 +10,35 @@ from datetime import timedelta, datetime, timezone
 from rest_framework.views import APIView
 
 
+def make_noti(request):
+    count = 0
+    # get all projects of a users
+    projects = request.user.project_set.all()
+    for project in projects:
+        # get all task of a projects
+        tasks = project.task_set.all()
+        for task in tasks:
+            if not task.done:
+                count += 1
+                # create a new Model
+                noti = Notification()
+                noti.task = task
+                # if closed to deadline 3 day
+                if (task.deadline - datetime.now(timezone.utc) - timedelta(hours=3) < timedelta(0)) and (
+                        task.noti[0] == '0'):
+                    noti.content = 'The deadline is already over'
+                    noti.save()
+                    task.noti = '1{}{}'.format(task.noti[1], task.noti[2])
+                # if out ò deadline
+                elif (timedelta(0) < task.deadline - datetime.now(timezone.utc) - timedelta(hours=3) < timedelta(
+                        days=3)) and (task.noti[1] == '0'):
+
+                    noti.content = '3 day left '
+                    noti.save()
+                    task.noti = task.noti[0] + '1' + task.noti[2]
+                task.save()
+    return count
+
 class MyProjects(LoginRequiredMixin, APIView):
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
