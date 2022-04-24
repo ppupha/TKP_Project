@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from models import Project, Task, Notification
+from .models import Project, Task#, Notification
 from django.views.generic import DetailView, ListView, DeleteView
 from django.views import View
-from forms import ProjectForm, TaskForm
+from .forms import ProjectForm, TaskForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, decorators
