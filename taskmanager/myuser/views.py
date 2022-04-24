@@ -107,7 +107,7 @@ class ActivateView(View):
             user.is_active = True
             user.save()
             login(request, user)
-            return redirect('task:projects')
+            return redirect('/')
         else:
             return render(request, 'registrations/acc_active_invalid.html')
 
