@@ -7,6 +7,16 @@ from django.contrib.auth import views as auth_views
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
+from django.core.mail import EmailMessage
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_str
+
+
+from .tokens import account_activation_token
+
 
 
 
@@ -84,3 +94,23 @@ class LoginClass(View):
         else:
             user = User.objects.filter(username=user_name)
             return render(request, 'myuser/login.html', {'user': user, 'mode': 1})
+
+
+class ActivateView(View):
+
+    def get(self, request, uidb64, token):
+        try:
+            # Decode a base64 encoded string. The received data is a user's primary key
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+        # if user exists and check_token is correct then account is successful activated
+        if user is not None and account_activation_token.check_token(user, token):
+            user.is_active = True
+            user.save()
+            login(request, user)
+            return redirect('task:projects')
+        else:
+            return render(request, 'registrations/acc_active_invalid.html')
+
