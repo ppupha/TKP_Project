@@ -138,3 +138,17 @@ def Save_Task(request, id):
             return HttpResponseRedirect(link)
     else:
         return HttpResponse("ERROR: TASK NOT FOUND")
+
+@decorators.login_required
+def Done_Task(request, id):
+    try:
+        if request.method == "GET":
+            task = Task.objects.get(id = id)
+            # task had been done
+            task.done = True
+            task.completed_day = datetime.now()
+            task.save()
+            link = '/project/{}'.format(task.project.id)
+            return HttpResponseRedirect(link)
+    except:
+        return HttpResponse("ERROR: TASK NOT FOUND")
