@@ -176,5 +176,72 @@
       </div>
     </div>
   </div>
-
+  <script>
+    function sortList(order) {
+      
+      var list, i, switching, b, shouldSwitch;
+      list = document.getElementById("idtask");
+      switching = true;
+      /* Make a loop that will continue until
+      no switching has been done: */
+      while (switching) {
+      // start by saying: no switching is done:
+      switching = false;
+      b = list.querySelectorAll("div.task");
+      // Loop through all list-items:
+      for (i = 0; i < (b.length - 1); i++) {
+        // start by saying there should be no switching:
+        shouldSwitch = false;
+        /* check if the next item should
+        switch place with the current item: */
+        if (order == 0){
+          d1 = new Date(b[i].querySelectorAll('div a div div.deadline')[0].innerHTML);
+          d2 = new Date(b[i + 1].querySelectorAll('div a div div.deadline')[0].innerHTML);
+        }
+        else {
+          d1 = b[i].querySelectorAll('div a div div.title')[0].innerHTML.toLowerCase();
+        d2 = b[i + 1].querySelectorAll('div a div div.title')[0].innerHTML.toLowerCase();
+        }
+        if (d1 > d2) {
+        /* if next item is alphabetically
+        lower than current item, mark as a switch
+        and break the loop: */
+        shouldSwitch = true;
+        break;
+        }
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark the switch as done: */
+        b[i].parentNode.insertBefore(b[i + 1], b[i]);
+        switching = true;
+      }
+      }
+    }
+  </script>
+  <script type="text/javascript">
+    function check_deadline(){
+      var list, i, b;
+    time_now = new Date()
+    time_last = new Date()
+    time_last.setDate(time_last.getDate() + 3);
+    list = document.getElementById("idtask");
+    b = list.querySelectorAll("div.task");
+    for (i = 0; i < (b.length); i++){
+      deadline = new Date(b[i].querySelectorAll('div div p')[0].innerHTML)
+      ob = b[i].querySelectorAll('div div a');
+      if (ob.length == 2)
+      {}
+      else if (time_now > deadline){
+            ob[0].style.background = "#FF033E";
+      }
+      else if (time_last > deadline){
+          ob[0].style.background = "#FF8C00";
+      }
+    }
+    var outTime = setTimeout(function(){
+      check_deadline()
+    },500);
+    }
+  </script>
 {% endblock %}
