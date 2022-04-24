@@ -110,3 +110,15 @@ class  MyProject(LoginRequiredMixin, APIView):
             link = "/project/{}".format(id)
             return HttpResponseRedirect(link)
 
+@decorators.login_required
+def Delete_Task(request, id):
+    try:
+        if request.method == 'GET':
+            task = Task.objects.get(id = id)
+            # delete task
+            task.delete()
+            link = '/project/{}'.format(task.project.id)
+            return HttpResponseRedirect(link)
+    except:
+        return HttpResponse("ERROR: TASK NOT FOUND")
+
