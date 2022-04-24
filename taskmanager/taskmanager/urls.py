@@ -23,4 +23,4 @@ urlpatterns = [
     path('user/', include('myuser.urls')),
     path('', include('user.urls')),
     path('', include('task.urls')),
-] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
