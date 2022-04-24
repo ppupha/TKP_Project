@@ -1,0 +1,17 @@
+{% extends "task/base.html" %}
+
+{% block contain %}
+<div class="row" >
+    <div class="col-sm-2" style="background: #d6d6d6;">
+        {% block left %}
+
+        {% endblock %}
+    </div>
+    
+    <div class="col-sm-10"">
+        {% block contain-right %}
+
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
