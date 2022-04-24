@@ -1,0 +1,180 @@
+{% extends "task/base_left.html" %}
+{% block title %}
+  {{ project.title }}
+{% endblock %}
+
+{% block left %}
+<div class="sidebar">
+  <div class="sticky-top">
+  <h3><center><a href="{% url 'task:project' project.id %}" style="color: black">{{project.title}}</a></h3></center>
+  <br>
+  <p><button class="btn btn-sm btn-outline-dark btn-block" onclick="sortList(1)"><strong>Sort by name</strong></button></p>
+  <p><button class="btn btn-sm btn-outline-dark btn-block" onclick="sortList(0)"><strong>Sort by date</strong></button></p>
+  <p><button class="btn btn-sm btn-outline-dark btn-block" data-toggle="modal" data-target="#addTask"><strong>Add Task</strong></button></p>
+  <p><button class="btn btn-sm btn-outline-dark btn-block" data-toggle="modal" data-target="#del-project"><strong>Delete Project</strong></button></p>
+  </div>
+    <div class="modal fade" id="del-project">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Do You Want To Delete Project {{ project.title }}</h4>
+          </div>
+          <div class="modal-footer">
+            <a href="{% url 'task:del-project' project.id %}" class="btn btn-success">Delete</a>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block contain-right %}
+  <div class="contain" id="idtask">
+    {% for task in tasks %}
+      <div class="row py-2 task">
+        <div class="col-sm-1"></div>
+        <div class="col-md-8">
+          <a class="list-group-item" id="list_task" data-toggle="modal" data-target="#id{{ task.id }}" style="background-color:{{ task.mode }};">
+            <div class="row"> 
+              <div class="col-md-10 title"> {{task.taskmodel.title}}</div>
+              <div class="col-xs-3 bottomright deadline" style="font-size:15px;color:black">{{task.taskmodel.deadline | date:'Y-m-d H:i' }}</div>
+            </div>
+          </a>
+            
+        </div>
+        <div class="col-xs-2">
+          <a class="btn btn-danger py-3 px-3" href="{% url 'task:del-task' task.id  %}">Delete</a>
+          {% if task.taskmodel.done == False %}
+            <a class="btn btn-success py-3 px-3" href="{% url 'task:done-task' task.id  %}">Done</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="modal fade" id="id{{ task.id }}">
+        <div class="modal-dialog">
+          <div class="modal-content">
+             <form method = "POST" action = "{% url 'task:save-task' task.id %}">
+              <!-- Modal Header -->
+              <div class="modal-header">
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h4>Title</h4>
+                  </div>
+                  <div class="col-md-8">
+                    <p>{{ task.taskform.title }}</p>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6>Description</h6>
+                  </div>
+                  <div class="col-md-8">
+                    <p>{{ task.taskform.description }}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6>Deadline</h6>
+                  </div>
+                  <div class="col-md-8">
+                    <p>{{ task.taskform.deadline }}</p>
+                  </div>
+                </div>
+                {% if task.taskmodel.done %}
+                  <div class="row">
+                      <div class="col-sm-3">
+                        <h6>Completed</h6>
+                      </div>
+                      <div class="col-md-8">
+                        <p>{{ task.taskmodel.completed_day }}</p>
+                      </div>
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                {% if task.taskmodel.done == False %}
+                  <input type = "submit" class="btn btn-success"  value = "Save"/>
+                {% endif %}
+                
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    <!-- Button to Open the Modal Add New Task -->
+    <div class="row" >
+      <div class="col-sm-1"></div>
+      <div class="col-sm-8">
+        <center>
+          <a class="list-group-item btn btn-success" data-toggle="modal" data-target="#addTask" style="background-color: #d6d6d6">Add New Task</a>
+        </center>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <br>
+    <!-- The Modal Add New Task -->
+    <div class="modal fade" id="addTask">
+      <div class="modal-dialog">
+        <div class="modal-content">
+           <form method = "POST" action = "{% url 'task:project' project.id %}">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Add New Task</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              {% csrf_token %}
+              <div class="row">
+                  <div class="col-sm-3">
+                    <h4>Title</h4>
+                  </div>
+                  <div class="col-md-8">
+                    <p>{{ taskform.title }}</p>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6>Description</h6>
+                  </div>
+                  <div class="col-md-8">
+                    <p>{{ taskform.description }}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6>Deadline</h6>
+                  </div>
+                  <div class="col-md-8">
+                    <p>{{ taskform.deadline }}</p>
+                  </div>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <input type = "submit" class="btn btn-success"  value = "Add"/>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
