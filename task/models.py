@@ -12,3 +12,16 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+class Task(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    title = models.CharField(max_length=45)
+    description = models.TextField(max_length=300, blank=False)
+    deadline = models.DateTimeField(default=timezone.now)
+    done = models.BooleanField(default=False)
+    creationDate = models.DateField(auto_now_add=True)
+    noti = models.CharField(max_length=3, default='000')
+    completed_day = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.title
