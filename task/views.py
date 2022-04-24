@@ -93,3 +93,20 @@ class  MyProject(LoginRequiredMixin, APIView):
         data = {"project": project, "tasks": tasks, "taskform": TaskForm, 'notis': notis, 'notic_count': notic_count}
 
         return render(request, "task/project.html", data)
+        
+    # if method == "POST"
+    def post(self, request, id):
+        f = TaskForm(request.POST)
+        if f.is_valid():
+            task = Task()
+            task.project = Project.objects.get(id = id)
+            task.title = f.cleaned_data['title']
+            task.description = f.cleaned_data['description']
+            task.deadline = f.cleaned_data['deadline']
+            task.save()
+            link = "/project/{}".format(id)
+            return HttpResponseRedirect(link)
+        else:
+            link = "/project/{}".format(id)
+            return HttpResponseRedirect(link)
+
