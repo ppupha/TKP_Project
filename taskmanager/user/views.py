@@ -31,7 +31,7 @@ def user_profile(request):
     data = {"notis": notis, 'form': form, "notic_count": notic_count}
     
     if request.method == "POST":
-        form = UserInfoForm(request.POST, request.FILES, instance=request.myuser.Info)
+        form = UserInfoForm(request.POST, request.FILES, instance=request.user.Info)
         if form.is_valid():
             custom_form = form.save(False)
             custom_form.user = request.user
