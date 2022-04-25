@@ -94,7 +94,7 @@ class LoginClass(View):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect('user:index')
+                return redirect('task:projects')
         else:
             user = User.objects.filter(username=user_name)
             return render(request, 'myuser/login.html', {'user': user, 'mode': 1})
