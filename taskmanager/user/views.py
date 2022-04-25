@@ -15,7 +15,10 @@ class AuthorsView(View):
     def get(self, request):
         return render(request, 'user/authors.html')
 
-
+class HelpView(View):
+    def get(self, request):
+        return render(request, 'user/help.html')
+        
 @login_required(login_url='/login/')
 def user_profile(request):
     # Add notification to navbar

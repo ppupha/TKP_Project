@@ -23,7 +23,7 @@ def make_noti(request):
                 # create a new Model
                 noti = Notification()
                 noti.task = task
-                # if closed to deadline 3 day
+                # if closed to deadline 5 day
                 if (task.deadline - datetime.now(timezone.utc) - timedelta(hours=3) < timedelta(0)) and (
                         task.noti[0] == '0'):
                     noti.content = 'The deadline is already over'
@@ -31,9 +31,9 @@ def make_noti(request):
                     task.noti = '1{}{}'.format(task.noti[1], task.noti[2])
                 # if out ò deadline
                 elif (timedelta(0) < task.deadline - datetime.now(timezone.utc) - timedelta(hours=3) < timedelta(
-                        days=3)) and (task.noti[1] == '0'):
+                        days=5)) and (task.noti[1] == '0'):
 
-                    noti.content = '3 day left '
+                    noti.content = '5 day left '
                     noti.save()
                     task.noti = task.noti[0] + '1' + task.noti[2]
                 task.save()
