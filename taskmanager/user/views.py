@@ -31,11 +31,11 @@ def user_profile(request):
     data = {"notis": notis, 'form': form, "notic_count": notic_count}
     
     if request.method == "POST":
-        form = UserInfoForm(request.POST, request.FILES, instance=request.user.Info)
+        form = UserInfoForm(request.POST, request.FILES, instance=request.myuser.Info)
         if form.is_valid():
             custom_form = form.save(False)
             custom_form.user = request.user
             custom_form.save()
-            return redirect('myuser:user_profile')
+            return redirect('user:user_profile')
         
     return render(request, 'myuser/user_profile.html', data)
