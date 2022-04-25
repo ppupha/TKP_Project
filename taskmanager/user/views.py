@@ -38,4 +38,4 @@ def user_profile(request):
             custom_form.save()
             return redirect('user:user_profile')
         
-    return render(request, 'myuser/user_profile.html', data)
+    return render(request, 'user/user_profile.html', data)
