@@ -39,3 +39,14 @@ class UserForm(forms.Form):
             self.cleaned_data['password1']
         )
         return user
+
+class UserInfoForm(forms.ModelForm):
+
+    class Meta:
+        model = UserInfo
+        fields = ('user_fullname', 'user_description', 'user_avatar')
+        widgets = {
+            'user_fullname' : forms.TextInput(attrs={'class': 'form-control'}),
+            'user_description' : forms.Textarea(attrs={'class': 'form-control', 'rows':'5'}),
+            'user_avatar' : forms.FileInput(),
+        }
