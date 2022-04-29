@@ -7,26 +7,9 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   task.migrations
-
 Submodules
 ----------
 
-task.admin module
------------------
-
-.. automodule:: task.admin
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-task.apps module
-----------------
-
-.. automodule:: task.apps
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 task.forms module
 -----------------
@@ -44,21 +27,6 @@ task.models module
    :undoc-members:
    :show-inheritance:
 
-task.tests module
------------------
-
-.. automodule:: task.tests
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-task.urls module
-----------------
-
-.. automodule:: task.urls
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 task.views module
 -----------------

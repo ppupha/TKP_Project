@@ -7,26 +7,9 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   user.migrations
-
 Submodules
 ----------
 
-user.admin module
------------------
-
-.. automodule:: user.admin
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-user.apps module
-----------------
-
-.. automodule:: user.apps
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 user.models module
 ------------------
@@ -36,21 +19,6 @@ user.models module
    :undoc-members:
    :show-inheritance:
 
-user.tests module
------------------
-
-.. automodule:: user.tests
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-user.urls module
-----------------
-
-.. automodule:: user.urls
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 user.views module
 -----------------
