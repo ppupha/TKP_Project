@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class UserInfo(models.Model):
+    '''
+
+        Information about User
+
+    '''
     # the relationship between class UserInfo and class User is one-to-one
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="Info")
 

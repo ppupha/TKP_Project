@@ -2,7 +2,17 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 
 class TokenGenerator(PasswordResetTokenGenerator):
+    '''
+
+        Create Token
+
+    '''
     def _make_hash_value(self, user, timestamp):
+        '''
+
+        Create Hash
+
+        '''
         login_timestamp = '' if user.last_login is None else user.last_login.replace(microsecond=0, tzinfo=None)
         return str(user.pk) + str(user.is_active) + str(login_timestamp) + str(timestamp)
 """

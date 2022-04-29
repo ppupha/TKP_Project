@@ -26,6 +26,13 @@ class IndexView(View):
 
 @login_required
 def user_logout(request):
+    '''
+
+    User Logout
+
+    :param request: request from user
+    :return: redirect to home page
+    '''
     logout(request)
     request.session.flush()
     return redirect('user:index')
@@ -37,10 +44,25 @@ class SignupView(View):
     else return registration form
     """
     def get(self, request):
+        '''
+
+        GET method
+
+        :param request: GET request
+        :return: show signup page
+        '''
         user_form = UserForm()
         return render(request, 'myuser/signup.html', {'user_form': user_form, 'success': 0})
 
     def post(self, request):
+        '''
+
+        POST method
+
+        :param request: POST request
+        :return: if form data is valid then create new user, send activation mail.
+                 if data ist valid, show unsucessfull message
+        '''
         user_form = UserForm(request.POST)
         if user_form.is_valid():
 
@@ -83,9 +105,23 @@ class LoginClass(View):
     - Username does not exist
     """
     def get(self, request):
+        '''
+
+        GET Method
+
+        :param request: GET rquest
+        :return: login page
+        '''
         return render(request, 'myuser/login.html', {'mode': 0})
 
     def post(self, request):
+        '''
+
+        POST Method
+
+        :param request: POST request
+        :return: login  succesful if login and password are correct
+        '''
         user_name = request.POST.get('username')
         pass_word = request.POST.get('password')
         # return a user if both username and password are valid
@@ -102,7 +138,24 @@ class LoginClass(View):
 
 class ActivateView(View):
 
+    '''
+
+    User Mail Activation
+    USer will reciev an email after regis.
+    User need to click link to active account
+
+    '''
+
     def get(self, request, uidb64, token):
+        '''
+
+        GET method
+
+        :param request: GET request
+        :param uidb64: user id
+        :param token: vetify token
+        :return: user is active if compare token successful, else show invalid token message
+        '''
         try:
             # Decode a base64 encoded string. The received data is a user's primary key
             uid = force_str(urlsafe_base64_decode(uidb64))
@@ -119,13 +172,31 @@ class ActivateView(View):
             return render(request, 'registrations/acc_active_invalid.html')
 
 class PasswordChangeView_(auth_views.PasswordChangeView):
+
+    '''
+
+        Change Password
+
+    '''
+
     success_url = reverse_lazy('myuser:password_change_done')
     template_name = 'registrations/password_change_form.html'
 
 class PasswordChageDoneView_(auth_views.PasswordChangeDoneView):
+    '''
+
+    Redirect to Page after change password
+
+    '''
     template_name = 'registrations/password_change_done.html'
 
 class PasswordResetView_(auth_views.PasswordResetView):
+
+    '''
+
+    Reset Password
+
+    '''
     subject_template_name = 'registrations/password_reset_subject.txt'
     template_name = 'registrations/password_reset_form.html'
     success_url = reverse_lazy('myuser:password_reset_done')
@@ -133,11 +204,26 @@ class PasswordResetView_(auth_views.PasswordResetView):
     html_email_template_name = email_template_name
 
 class PasswordResetDoneView_(auth_views.PasswordResetDoneView):
+    '''
+
+    Password Reset Done
+
+    '''
     template_name = 'registrations/password_reset_done.html'
 
 class PasswordResetConfirmView_(auth_views.PasswordResetConfirmView):
+    '''
+
+    Cofirm Reset Password
+
+    '''
     template_name = 'registrations/password_reset_confirm.html'
     success_url = reverse_lazy('myuser:password_reset_complete')
 
 class PasswordResetCompleteView_(auth_views.PasswordResetCompleteView):
+    '''
+
+    Complete Reset Password
+
+    '''
     template_name = 'registrations/password_reset_complete.html'

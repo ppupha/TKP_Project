@@ -136,10 +136,19 @@
 <dt class="sig sig-object py" id="user.views.AuthorsView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user.views.</span></span><span class="sig-name descname"><span class="pre">AuthorsView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user.views.AuthorsView" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.View</span></code></p>
+<p>Author Page</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="user.views.AuthorsView.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user.views.AuthorsView.get" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – GET request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>html for author page</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -147,10 +156,19 @@
 <dt class="sig sig-object py" id="user.views.HelpView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user.views.</span></span><span class="sig-name descname"><span class="pre">HelpView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user.views.HelpView" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.View</span></code></p>
+<p>Help Page</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="user.views.HelpView.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user.views.HelpView.get" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – GET request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>html for help page</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -158,17 +176,37 @@
 <dt class="sig sig-object py" id="user.views.IndexView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user.views.</span></span><span class="sig-name descname"><span class="pre">IndexView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user.views.IndexView" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.View</span></code></p>
+<p>Home Page</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="user.views.IndexView.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user.views.IndexView.get" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – GET request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>html for homepage</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="user.views.user_profile">
 <span class="sig-prename descclassname"><span class="pre">user.views.</span></span><span class="sig-name descname"><span class="pre">user_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user.views.user_profile" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>User Profile Page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – request form user (it can be GET or POST)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>&gt; if request method is GET, show user profile
+&gt; if request method is POST, update information for user if form data is valid
+- And then back to profile page</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-user">

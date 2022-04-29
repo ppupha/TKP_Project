@@ -135,6 +135,7 @@
 <dt class="sig sig-object py" id="task.forms.ProjectForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">task.forms.</span></span><span class="sig-name descname"><span class="pre">ProjectForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.forms.ProjectForm" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<p>Form For Projects Object</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="task.forms.ProjectForm.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#task.forms.ProjectForm.Meta" title="Permalink to this definition"></a></dt>
@@ -179,6 +180,7 @@
 <dt class="sig sig-object py" id="task.forms.TaskForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">task.forms.</span></span><span class="sig-name descname"><span class="pre">TaskForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.forms.TaskForm" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<p>Form for Tasj Object</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="task.forms.TaskForm.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#task.forms.TaskForm.Meta" title="Permalink to this definition"></a></dt>
@@ -224,8 +226,9 @@
 <span id="task-models-module"></span><h2>task.models module<a class="headerlink" href="#module-task.models" title="Permalink to this headline"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="task.models.Notification">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">task.models.</span></span><span class="sig-name descname"><span class="pre">Notification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">creationDate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actived</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.models.Notification" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">task.models.</span></span><span class="sig-name descname"><span class="pre">Notification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.models.Notification" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Information About Nitofication</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="task.models.Notification.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#task.models.Notification.DoesNotExist" title="Permalink to this definition"></a></dt>
@@ -303,8 +306,9 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="task.models.Project">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">task.models.</span></span><span class="sig-name descname"><span class="pre">Project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">creationDate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.models.Project" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">task.models.</span></span><span class="sig-name descname"><span class="pre">Project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.models.Project" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Information about Project</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="task.models.Project.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#task.models.Project.DoesNotExist" title="Permalink to this definition"></a></dt>
@@ -390,8 +394,9 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="task.models.Task">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">task.models.</span></span><span class="sig-name descname"><span class="pre">Task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deadline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">creationDate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noti</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">completed_day</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.models.Task" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">task.models.</span></span><span class="sig-name descname"><span class="pre">Task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.models.Task" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Information About Task</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="task.models.Task.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#task.models.Task.DoesNotExist" title="Permalink to this definition"></a></dt>
@@ -542,31 +547,98 @@ object the first time, the query is executed.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="task.views.Delete_Project">
 <span class="sig-prename descclassname"><span class="pre">task.views.</span></span><span class="sig-name descname"><span class="pre">Delete_Project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.views.Delete_Project" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Delete a Project by Id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – </p></li>
+<li><p><strong>id</strong> – project id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>if projects with id is exist, then delete it and redirect to main page,
+else raise error</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="task.views.Delete_Task">
 <span class="sig-prename descclassname"><span class="pre">task.views.</span></span><span class="sig-name descname"><span class="pre">Delete_Task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.views.Delete_Task" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><blockquote>
+<div><p>Delete a Task from Project</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – request from user</p></li>
+<li><p><strong>id</strong> – Task id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>if Task is exist, delete it and redirect to project page,
+else raise error</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="task.views.Done_Task">
 <span class="sig-prename descclassname"><span class="pre">task.views.</span></span><span class="sig-name descname"><span class="pre">Done_Task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.views.Done_Task" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Make Task as Done</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – request from user</p></li>
+<li><p><strong>id</strong> – Task id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>make task as done and direct back to project page</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="task.views.MyProject">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">task.views.</span></span><span class="sig-name descname"><span class="pre">MyProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.views.MyProject" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.views.APIView</span></code></p>
+<p>Infor about Object PRoject</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="task.views.MyProject.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.views.MyProject.get" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Get Method
+Show all Task in Projects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – GET request from user</p></li>
+<li><p><strong>id</strong> – id of Project</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tasks and these notifications</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="task.views.MyProject.post">
 <span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.views.MyProject.post" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>POST method
+Create a new Task into this project</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – POST request from user</p></li>
+<li><p><strong>id</strong> – id of project</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>New Task is create if form data is Valid, then redirect bach to Project Page</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -574,10 +646,24 @@ object the first time, the query is executed.</p>
 <dt class="sig sig-object py" id="task.views.MyProjects">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">task.views.</span></span><span class="sig-name descname"><span class="pre">MyProjects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.views.MyProjects" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.views.APIView</span></code></p>
+<p>Infor about MyProjects Objects (Cout From TZ)</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="task.views.MyProjects.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.views.MyProjects.get" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>GET Method for model MyProjects
+Show all Projects of a user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – GET request from user</p></li>
+<li><p><strong>str</strong> – sorting order</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>sorted list of all Projects,</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="task.views.MyProjects.login_url">
@@ -587,7 +673,17 @@ object the first time, the query is executed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="task.views.MyProjects.post">
 <span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.views.MyProjects.post" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>POST method for model MyProjects
+Create a new project</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – POST request from user</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a Project Object is created if form data is valid and then redirect to main page</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="task.views.MyProjects.redirect_field_name">
@@ -599,12 +695,31 @@ object the first time, the query is executed.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="task.views.Save_Task">
 <span class="sig-prename descclassname"><span class="pre">task.views.</span></span><span class="sig-name descname"><span class="pre">Save_Task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.views.Save_Task" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><blockquote>
+<div><p>POST Method for model Task
+Update Information for Task</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – POST request from user</p></li>
+<li><p><strong>id</strong> – Task id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>if task is exit, update task information with valid data,
+if task didnt found, raise error</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="task.views.make_noti">
 <span class="sig-prename descclassname"><span class="pre">task.views.</span></span><span class="sig-name descname"><span class="pre">make_noti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#task.views.make_noti" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Create notifications for all projects
+:param request: get request from user
+:return: number of notifications</p>
+</dd></dl>
 
 </section>
 <section id="module-task">

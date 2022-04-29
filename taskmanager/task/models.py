@@ -6,6 +6,11 @@ from django.utils import timezone
 # Create your models here.
 
 class Project(models.Model):
+    '''
+
+    Information about Project
+
+    '''
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=45)
     creationDate = models.DateField(auto_now_add=True)
@@ -14,6 +19,11 @@ class Project(models.Model):
         return self.title
 
 class Task(models.Model):
+    '''
+
+    Information About Task
+
+    '''
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     title = models.CharField(max_length=45)
     description = models.TextField(max_length=300, blank=False)
@@ -27,6 +37,11 @@ class Task(models.Model):
         return self.title
 
 class Notification(models.Model):
+    '''
+
+    Information About Nitofication
+
+    '''
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     content = models.CharField(max_length=100)
     creationDate = models.DateTimeField(auto_now_add= True)
