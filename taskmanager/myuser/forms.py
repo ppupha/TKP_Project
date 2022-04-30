@@ -4,12 +4,33 @@ from django.contrib.auth.models import User
 
 
 class UserForm(forms.Form):
+    '''
+
+    Форма класса объекта пользователь
+
+    Содержит:
+
+    username - имя пользователя
+
+    email - электронная почта пользователя
+
+    password1 - пароль
+
+    password2 - пароль (для подтверждения)
+
+    '''
     username = forms.CharField(label='Username', min_length=6, max_length=150, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Username'}))
     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Email'}))
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Password'}))
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Confirm'}))
 
     def clean_username(self):
+        '''
+        Функция проверки наличия имени пользователя.
+
+        Возвращает: имя пользователя, если оно уникально, иначе - ошибка.
+
+        '''
         username = self.cleaned_data['username'].lower()
         r = User.objects.filter(username=username)
         if r.count():
@@ -17,6 +38,12 @@ class UserForm(forms.Form):
         return username
 
     def clean_email(self):
+        '''
+        Функция проверяет наличие введенной электронной почты пользователя.
+
+        Возвращает: ошибку при отсутствии почты, иначе электронную почту пользователя.
+
+        '''
         email = self.cleaned_data['email'].lower()
         r = User.objects.filter(email=email)
         #if r.count():
@@ -24,6 +51,14 @@ class UserForm(forms.Form):
         return email
 
     def clean_password2(self):
+        '''
+        Функция проверки пароля.
+
+        Сравнивает два поля: пароль и  подтверждение пароля.
+
+        Возвращает: пароль при успехе, иначе - ошибка.
+
+        '''
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
 
@@ -33,6 +68,13 @@ class UserForm(forms.Form):
         return password2
 
     def save(self, commit=True):
+        '''
+
+        Функция сохранения пользователя в базе данных.
+
+        Возвращает: объект "Пользователь"
+
+        '''
         user = User.objects.create_user(
             self.cleaned_data['username'],
             self.cleaned_data['email'],
@@ -42,6 +84,11 @@ class UserForm(forms.Form):
 
 class UserInfoForm(forms.ModelForm):
 
+    '''
+    
+    Форма класса объекта профиля пользователя.
+
+    '''
     class Meta:
         model = UserInfo
         fields = ('user_fullname', 'user_description', 'user_avatar')

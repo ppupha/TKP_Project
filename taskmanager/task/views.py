@@ -11,6 +11,11 @@ from rest_framework.views import APIView
 
 
 def make_noti(request):
+    '''
+    Create notifications for all projects
+    :param request: get request from user
+    :return: number of notifications
+    '''
     count = 0
     # get all projects of a users
     projects = request.user.project_set.all()
@@ -41,11 +46,26 @@ def make_noti(request):
 
 
 class MyProjects(LoginRequiredMixin, APIView):
+    '''
+
+    Infor about MyProjects Objects (Cout From TZ)
+
+    '''
+
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
 
     # if request.method == "GẺT"
     def get(self, request, str='id'):
+        '''
+
+        GET Method for model MyProjects
+        Show all Projects of a user
+
+        :param request: GET request from user
+        :param str: sorting order
+        :return: sorted list of all Projects,
+        '''
         projects = request.user.project_set.all().order_by(str)
         # get all notification of user
         make_noti(request)
@@ -57,6 +77,14 @@ class MyProjects(LoginRequiredMixin, APIView):
 
     # if request.method == "POST"
     def post(self, request):
+        '''
+
+        POST method for model MyProjects
+        Create a new project
+
+        :param request: POST request from user
+        :return: a Project Object is created if form data is valid and then redirect to main page
+        '''
         f = ProjectForm(request.POST)
         if f.is_valid():
 
@@ -75,6 +103,15 @@ class MyProjects(LoginRequiredMixin, APIView):
 
 @decorators.login_required
 def Delete_Project(request, id):
+    '''
+
+    Delete a Project by Id
+
+    :param request:
+    :param id: project id
+    :return: if projects with id is exist, then delete it and redirect to main page,
+             else raise error
+    '''
     try:
         # get project need delete
         project = Project.objects.get(id=id)
@@ -86,9 +123,22 @@ def Delete_Project(request, id):
 
 
 class MyProject(LoginRequiredMixin, APIView):
+    '''
 
+        Infor about Object PRoject
+
+    '''
     # if request.method == "GET"
     def get(self, request, id):
+        '''
+
+        Get Method
+        Show all Task in Projects
+
+        :param request: GET request from user
+        :param id: id of Project
+        :return: tasks and these notifications
+        '''
         project = Project.objects.get(id=id)
         tasks = list(project.task_set.all())
         taskforms = []
@@ -128,6 +178,15 @@ class MyProject(LoginRequiredMixin, APIView):
 
     # if method == "POST"
     def post(self, request, id):
+        '''
+
+        POST method
+        Create a new Task into this project
+
+        :param request: POST request from user
+        :param id: id of project
+        :return: New Task is create if form data is Valid, then redirect bach to Project Page
+        '''
         f = TaskForm(request.POST)
         if f.is_valid():
             task = Task()
@@ -145,6 +204,15 @@ class MyProject(LoginRequiredMixin, APIView):
 
 @decorators.login_required
 def Delete_Task(request, id):
+    '''
+
+      Delete a Task from Project
+
+    :param request: request from user
+    :param id: Task id
+    :return: if Task is exist, delete it and redirect to project page,
+             else raise error
+    '''
     try:
         if request.method == 'GET':
             task = Task.objects.get(id=id)
@@ -158,6 +226,16 @@ def Delete_Task(request, id):
 
 @decorators.login_required
 def Save_Task(request, id):
+    '''
+
+     POST Method for model Task
+     Update Information for Task
+
+    :param request: POST request from user
+    :param id: Task id
+    :return: if task is exit, update task information with valid data,
+             if task didnt found, raise error
+    '''
     if request.method == "POST":
         # get data from request
         f = TaskForm(request.POST)
@@ -176,6 +254,14 @@ def Save_Task(request, id):
 
 @decorators.login_required
 def Done_Task(request, id):
+    '''
+
+    Make Task as Done
+
+    :param request: request from user
+    :param id: Task id
+    :return: make task as done and direct back to project page
+    '''
     try:
         if request.method == "GET":
             task = Task.objects.get(id=id)

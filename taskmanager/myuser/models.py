@@ -4,6 +4,21 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class UserInfo(models.Model):
+    '''
+
+        Класс профиля пользователя.
+
+        Содержит:
+
+        user - пользователь.
+
+        user_fullname - полное имя пользователя.
+
+        user_description - описание пользователя.(дополнительная информация)
+        
+        user_avatar - аватарка(фото профиля) пользователя.
+
+    '''
     # the relationship between class UserInfo and class User is one-to-one
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="Info")
 

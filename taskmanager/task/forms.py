@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 
 
 class ProjectForm(forms.ModelForm):
+    '''
+
+    Form For Projects Object
+
+    '''
     class Meta:
         model = Project
         fields = ('title',)
@@ -12,6 +17,11 @@ class ProjectForm(forms.ModelForm):
         }
 
 class TaskForm(forms.ModelForm):
+    '''
+
+    Form for Tasj Object
+
+    '''
     class Meta:
         model = Task
         fields = ("title", "description", "deadline")

@@ -8,19 +8,58 @@ from django.contrib.auth.decorators import login_required
 
 
 class IndexView(View):
+    '''
+
+        Home Page
+
+    '''
     def get(self, request):
+        '''
+
+        :param request: GET request
+        :return: html for homepage
+        '''
         return render(request, 'user/index.html')
 
 class AuthorsView(View):
+    '''
+
+    Author Page
+
+    '''
     def get(self, request):
+        '''
+
+        :param request: GET request
+        :return: html for author page
+        '''
         return render(request, 'user/authors.html')
 
 class HelpView(View):
+    '''
+
+    Help Page
+
+    '''
     def get(self, request):
+        '''
+
+        :param request: GET request
+        :return: html for help page
+        '''
         return render(request, 'user/help.html')
         
 @login_required(login_url='/login/')
 def user_profile(request):
+    '''
+
+    User Profile Page
+
+    :param request: request form user (it can be GET or POST)
+    :return: > if request method is GET, show user profile
+             > if request method is POST, update information for user if form data is valid
+             - And then back to profile page
+    '''
     # Add notification to navbar
     make_noti(request)
     projects = request.user.project_set.all()
