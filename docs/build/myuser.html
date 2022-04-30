@@ -100,7 +100,12 @@
 <dt class="sig sig-object py" id="myuser.forms.UserForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.forms.</span></span><span class="sig-name descname"><span class="pre">UserForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.forms.UserForm" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.forms.Form</span></code></p>
-<p>User Form</p>
+<p>Форма класса объекта пользователь</p>
+<p>Содержит:</p>
+<p>username - имя пользователя</p>
+<p>email - электронная почта пользователя</p>
+<p>password1 - пароль</p>
+<p>password2 - пароль (для подтверждения)</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="myuser.forms.UserForm.base_fields">
 <span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'password1':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'password2':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'username':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#myuser.forms.UserForm.base_fields" title="Permalink to this definition"></a></dt>
@@ -109,38 +114,23 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="myuser.forms.UserForm.clean_email">
 <span class="sig-name descname"><span class="pre">clean_email</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#myuser.forms.UserForm.clean_email" title="Permalink to this definition"></a></dt>
-<dd><p>Check if email is exist</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>email if check ok,
-else raise error</p>
-</dd>
-</dl>
+<dd><p>Функция проверяет наличие введенной электронной почты пользователя.</p>
+<p>Возвращает: ошибку при отсутствии почты, иначе электронную почту пользователя.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="myuser.forms.UserForm.clean_password2">
 <span class="sig-name descname"><span class="pre">clean_password2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#myuser.forms.UserForm.clean_password2" title="Permalink to this definition"></a></dt>
-<dd><p>Check Password
-Compare password with second password</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>passwork if check ok
-else raise error</p>
-</dd>
-</dl>
+<dd><p>Функция проверки пароля.</p>
+<p>Сравнивает два поля: пароль и  подтверждение пароля.</p>
+<p>Возвращает: пароль при успехе, иначе - ошибка.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="myuser.forms.UserForm.clean_username">
 <span class="sig-name descname"><span class="pre">clean_username</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#myuser.forms.UserForm.clean_username" title="Permalink to this definition"></a></dt>
-<dd><p>Check if username is exist</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>username if check ok,
-else raise error</p>
-</dd>
-</dl>
+<dd><p>Функция проверки наличия имени пользователя.</p>
+<p>Возвращает: имя пользователя, если оно уникально, иначе - ошибка.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -157,12 +147,8 @@ else raise error</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="myuser.forms.UserForm.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.forms.UserForm.save" title="Permalink to this definition"></a></dt>
-<dd><p>Save user to DB</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>user object</p>
-</dd>
-</dl>
+<dd><p>Функция сохранения пользователя в базе данных.</p>
+<p>Возвращает: объект “Пользователь”</p>
 </dd></dl>
 
 </dd></dl>
@@ -171,7 +157,7 @@ else raise error</p>
 <dt class="sig sig-object py" id="myuser.forms.UserInfoForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.forms.</span></span><span class="sig-name descname"><span class="pre">UserInfoForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.forms.UserInfoForm" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
-<p>Form for UserInfor Object</p>
+<p>Форма класса объекта профиля пользователя.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="myuser.forms.UserInfoForm.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#myuser.forms.UserInfoForm.Meta" title="Permalink to this definition"></a></dt>
@@ -219,7 +205,12 @@ else raise error</p>
 <dt class="sig sig-object py" id="myuser.models.UserInfo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.models.</span></span><span class="sig-name descname"><span class="pre">UserInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.models.UserInfo" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
-<p>Information about User</p>
+<p>Класс профиля пользователя.
+Содержит:
+user - пользователь.
+user_fullname - полное имя пользователя.
+user_description - описание пользователя.(дополнительная информация)
+user_avatar - аватарка(фото профиля) пользователя.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="myuser.models.UserInfo.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#myuser.models.UserInfo.DoesNotExist" title="Permalink to this definition"></a></dt>
@@ -291,7 +282,7 @@ object the first time, the query is executed.</p>
 <dt class="sig sig-object py" id="myuser.tokens.TokenGenerator">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.tokens.</span></span><span class="sig-name descname"><span class="pre">TokenGenerator</span></span><a class="headerlink" href="#myuser.tokens.TokenGenerator" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.tokens.PasswordResetTokenGenerator</span></code></p>
-<p>Create Token</p>
+<p>Создание токена</p>
 </dd></dl>
 
 </section>
@@ -301,25 +292,18 @@ object the first time, the query is executed.</p>
 <dt class="sig sig-object py" id="myuser.views.ActivateView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.views.</span></span><span class="sig-name descname"><span class="pre">ActivateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.ActivateView" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.View</span></code></p>
-<p>User Mail Activation
-USer will reciev an email after regis.
-User need to click link to active account</p>
+<p>Класс активации учетной записи пользователя.</p>
+<p>Пользователь получает электронное письмо после регистрации.</p>
+<p>Необходимо пройти по ссылке для активации учетной записи.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="myuser.views.ActivateView.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uidb64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.ActivateView.get" title="Permalink to this definition"></a></dt>
-<dd><p>GET method</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>request</strong> – GET request</p></li>
-<li><p><strong>uidb64</strong> – user id</p></li>
-<li><p><strong>token</strong> – vetify token</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>user is active if compare token successful, else show invalid token message</p>
-</dd>
-</dl>
+<dd><p>Метод GET</p>
+<p>Параметры запроса: GET запрос</p>
+<p>Параметры uidb64: id пользователя</p>
+<p>Параметры токена: проверка токена</p>
+<p>Возвращает: активную учетную запись пользователя, если сравнение токенов прошло успешно,
+иначе - сообщение об ошибке.</p>
 </dd></dl>
 
 </dd></dl>
@@ -339,38 +323,30 @@ User need to click link to active account</p>
 <dt class="sig sig-object py" id="myuser.views.LoginClass">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.views.</span></span><span class="sig-name descname"><span class="pre">LoginClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.LoginClass" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.View</span></code></p>
-<p>Load login page
-If user is authenticated then redirect to task:projects page
-else return the corresponding errors
-- Password is not correct
-- Account is inactive
-- Username does not exist</p>
+<p>Класс загрузки страницы входа в приложение.</p>
+<p>Если пользователь аутентифицирован, перенаправление на страницу проектов,
+иначе возврат одной из ошибок:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Неверный пароль.</p></li>
+<li><p>Учетная запись неактивна.</p></li>
+<li><p>Пользователя не существует.</p></li>
+</ul>
+</div></blockquote>
 <dl class="py method">
 <dt class="sig sig-object py" id="myuser.views.LoginClass.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.LoginClass.get" title="Permalink to this definition"></a></dt>
-<dd><p>GET Method</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>request</strong> – GET rquest</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>login page</p>
-</dd>
-</dl>
+<dd><p>Метод GET</p>
+<p>Параметры запроса: GET  запрос.</p>
+<p>Возврашает: страница входа в систему.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="myuser.views.LoginClass.post">
 <span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.LoginClass.post" title="Permalink to this definition"></a></dt>
-<dd><p>POST Method</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>request</strong> – POST request</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>login  succesful if login and password are correct</p>
-</dd>
-</dl>
+<dd><p>Метод POST</p>
+<p>Параметры запроса: POST запрос</p>
+<p>Возвращает: успешный вход в приложение (логин и пароль указаны верно)</p>
 </dd></dl>
 
 </dd></dl>
@@ -379,7 +355,7 @@ else return the corresponding errors
 <dt class="sig sig-object py" id="myuser.views.PasswordChageDoneView_">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.views.</span></span><span class="sig-name descname"><span class="pre">PasswordChageDoneView_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.PasswordChageDoneView_" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.views.PasswordChangeDoneView</span></code></p>
-<p>Redirect to Page after change password</p>
+<p>Перенапраление на страницу после смены пароля.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="myuser.views.PasswordChageDoneView_.template_name">
 <span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'registrations/password_change_done.html'</span></em><a class="headerlink" href="#myuser.views.PasswordChageDoneView_.template_name" title="Permalink to this definition"></a></dt>
@@ -391,7 +367,7 @@ else return the corresponding errors
 <dt class="sig sig-object py" id="myuser.views.PasswordChangeView_">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.views.</span></span><span class="sig-name descname"><span class="pre">PasswordChangeView_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.PasswordChangeView_" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.views.PasswordChangeView</span></code></p>
-<p>Change Password</p>
+<p>Изменение пароля.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="myuser.views.PasswordChangeView_.success_url">
 <span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/accounts/password_change/done/'</span></em><a class="headerlink" href="#myuser.views.PasswordChangeView_.success_url" title="Permalink to this definition"></a></dt>
@@ -408,7 +384,7 @@ else return the corresponding errors
 <dt class="sig sig-object py" id="myuser.views.PasswordResetCompleteView_">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.views.</span></span><span class="sig-name descname"><span class="pre">PasswordResetCompleteView_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.PasswordResetCompleteView_" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.views.PasswordResetCompleteView</span></code></p>
-<p>Complete Reset Password</p>
+<p>Полный сброс пароля.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="myuser.views.PasswordResetCompleteView_.template_name">
 <span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'registrations/password_reset_complete.html'</span></em><a class="headerlink" href="#myuser.views.PasswordResetCompleteView_.template_name" title="Permalink to this definition"></a></dt>
@@ -420,7 +396,7 @@ else return the corresponding errors
 <dt class="sig sig-object py" id="myuser.views.PasswordResetConfirmView_">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.views.</span></span><span class="sig-name descname"><span class="pre">PasswordResetConfirmView_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.PasswordResetConfirmView_" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.views.PasswordResetConfirmView</span></code></p>
-<p>Cofirm Reset Password</p>
+<p>Подтверждение сброса старого пароля.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="myuser.views.PasswordResetConfirmView_.success_url">
 <span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/user/accounts/reset/done/'</span></em><a class="headerlink" href="#myuser.views.PasswordResetConfirmView_.success_url" title="Permalink to this definition"></a></dt>
@@ -437,7 +413,7 @@ else return the corresponding errors
 <dt class="sig sig-object py" id="myuser.views.PasswordResetDoneView_">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.views.</span></span><span class="sig-name descname"><span class="pre">PasswordResetDoneView_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.PasswordResetDoneView_" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.views.PasswordResetDoneView</span></code></p>
-<p>Password Reset Done</p>
+<p>Завершение сброса старого пароля.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="myuser.views.PasswordResetDoneView_.template_name">
 <span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'registrations/password_reset_done.html'</span></em><a class="headerlink" href="#myuser.views.PasswordResetDoneView_.template_name" title="Permalink to this definition"></a></dt>
@@ -449,7 +425,7 @@ else return the corresponding errors
 <dt class="sig sig-object py" id="myuser.views.PasswordResetView_">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.views.</span></span><span class="sig-name descname"><span class="pre">PasswordResetView_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.PasswordResetView_" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.views.PasswordResetView</span></code></p>
-<p>Reset Password</p>
+<p>Сброс старого пароля.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="myuser.views.PasswordResetView_.email_template_name">
 <span class="sig-name descname"><span class="pre">email_template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'registrations/password_reset_email.html'</span></em><a class="headerlink" href="#myuser.views.PasswordResetView_.email_template_name" title="Permalink to this definition"></a></dt>
@@ -481,36 +457,24 @@ else return the corresponding errors
 <dt class="sig sig-object py" id="myuser.views.SignupView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">myuser.views.</span></span><span class="sig-name descname"><span class="pre">SignupView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.SignupView" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.View</span></code></p>
-<p>Load signup page
-If success == 1 then return successful registration message
-else return registration form</p>
+<p>Загрузка страницы регистрации.</p>
+<p>Если успех == 1, возвращает сообщение об успешной регистрации, иначе возращает</p>
+<p>форму регистрации.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="myuser.views.SignupView.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.SignupView.get" title="Permalink to this definition"></a></dt>
-<dd><p>GET method</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>request</strong> – GET request</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>show signup page</p>
-</dd>
-</dl>
+<dd><p>Метод GET</p>
+<p>Параметры запроса: GET запрос</p>
+<p>Возвращает: страница регистрации.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="myuser.views.SignupView.post">
 <span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.SignupView.post" title="Permalink to this definition"></a></dt>
-<dd><p>POST method</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>request</strong> – POST request</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>if form data is valid then create new user, send activation mail.
-if data ist valid, show unsucessfull message</p>
-</dd>
-</dl>
+<dd><p>Метод POST</p>
+<p>Параметры запроса: POST запрос</p>
+<p>Возвращает: если данные формы верны, то создается новый объект пользователь,
+на почту которого отправляется письмо со ссылкой для активации, иначе - сообщение об ошибке.</p>
 </dd></dl>
 
 </dd></dl>
@@ -518,15 +482,9 @@ if data ist valid, show unsucessfull message</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="myuser.views.user_logout">
 <span class="sig-prename descclassname"><span class="pre">myuser.views.</span></span><span class="sig-name descname"><span class="pre">user_logout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#myuser.views.user_logout" title="Permalink to this definition"></a></dt>
-<dd><p>User Logout</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>request</strong> – request from user</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>redirect to home page</p>
-</dd>
-</dl>
+<dd><p>Функция выхода пользователя из приложения.</p>
+<p>Параметры запроса: запрос от пользователя.</p>
+<p>Возвращает: перенаправление на домашнюю страницу.</p>
 </dd></dl>
 
 </section>

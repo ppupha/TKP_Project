@@ -28,10 +28,12 @@ class IndexView(View):
 def user_logout(request):
     '''
 
-    User Logout
+    Функция выхода пользователя из приложения.
 
-    :param request: request from user
-    :return: redirect to home page
+    Параметры запроса: запрос от пользователя.
+
+    Возвращает: перенаправление на домашнюю страницу.
+
     '''
     logout(request)
     request.session.flush()
@@ -39,17 +41,22 @@ def user_logout(request):
 
 class SignupView(View):
     """
-    Load signup page
-    If success == 1 then return successful registration message
-    else return registration form
+    Загрузка страницы регистрации.
+
+    Если успех == 1, возвращает сообщение об успешной регистрации, иначе возращает
+
+    форму регистрации.
+    
     """
     def get(self, request):
         '''
 
-        GET method
+        Метод GET
 
-        :param request: GET request
-        :return: show signup page
+        Параметры запроса: GET запрос
+
+        Возвращает: страница регистрации.
+
         '''
         user_form = UserForm()
         return render(request, 'myuser/signup.html', {'user_form': user_form, 'success': 0})
@@ -57,11 +64,13 @@ class SignupView(View):
     def post(self, request):
         '''
 
-        POST method
+        Метод POST 
 
-        :param request: POST request
-        :return: if form data is valid then create new user, send activation mail.
-                 if data ist valid, show unsucessfull message
+        Параметры запроса: POST запрос
+
+        Возвращает: если данные формы верны, то создается новый объект пользователь,
+        на почту которого отправляется письмо со ссылкой для активации, иначе - сообщение об ошибке.
+
         '''
         user_form = UserForm(request.POST)
         if user_form.is_valid():
@@ -97,30 +106,39 @@ class SignupView(View):
 
 class LoginClass(View):
     """
-    Load login page
-    If user is authenticated then redirect to task:projects page
-    else return the corresponding errors
-    - Password is not correct
-    - Account is inactive
-    - Username does not exist
+    Класс загрузки страницы входа в приложение.
+
+    Если пользователь аутентифицирован, перенаправление на страницу проектов,
+    иначе возврат одной из ошибок:
+
+     - Неверный пароль.
+
+     - Учетная запись неактивна.
+
+     - Пользователя не существует.
+
     """
     def get(self, request):
         '''
 
-        GET Method
+        Метод GET 
 
-        :param request: GET rquest
-        :return: login page
+        Параметры запроса: GET  запрос.
+
+        Возврашает: страница входа в систему.
+
         '''
         return render(request, 'myuser/login.html', {'mode': 0})
 
     def post(self, request):
         '''
 
-        POST Method
+        Метод POST 
 
-        :param request: POST request
-        :return: login  succesful if login and password are correct
+        Параметры запроса: POST запрос
+
+        Возвращает: успешный вход в приложение (логин и пароль указаны верно)
+
         '''
         user_name = request.POST.get('username')
         pass_word = request.POST.get('password')
@@ -140,21 +158,28 @@ class ActivateView(View):
 
     '''
 
-    User Mail Activation
-    USer will reciev an email after regis.
-    User need to click link to active account
+    Класс активации учетной записи пользователя.
+
+    Пользователь получает электронное письмо после регистрации.
+
+    Необходимо пройти по ссылке для активации учетной записи.
 
     '''
 
     def get(self, request, uidb64, token):
         '''
 
-        GET method
+        Метод GET
 
-        :param request: GET request
-        :param uidb64: user id
-        :param token: vetify token
-        :return: user is active if compare token successful, else show invalid token message
+        Параметры запроса: GET запрос
+
+        Параметры uidb64: id пользователя
+
+        Параметры токена: проверка токена
+        
+        Возвращает: активную учетную запись пользователя, если сравнение токенов прошло успешно,
+        иначе - сообщение об ошибке.
+
         '''
         try:
             # Decode a base64 encoded string. The received data is a user's primary key
@@ -175,7 +200,7 @@ class PasswordChangeView_(auth_views.PasswordChangeView):
 
     '''
 
-        Change Password
+        Изменение пароля.
 
     '''
 
@@ -185,7 +210,7 @@ class PasswordChangeView_(auth_views.PasswordChangeView):
 class PasswordChageDoneView_(auth_views.PasswordChangeDoneView):
     '''
 
-    Redirect to Page after change password
+    Перенапраление на страницу после смены пароля.
 
     '''
     template_name = 'registrations/password_change_done.html'
@@ -194,7 +219,7 @@ class PasswordResetView_(auth_views.PasswordResetView):
 
     '''
 
-    Reset Password
+    Сброс старого пароля.
 
     '''
     subject_template_name = 'registrations/password_reset_subject.txt'
@@ -206,7 +231,7 @@ class PasswordResetView_(auth_views.PasswordResetView):
 class PasswordResetDoneView_(auth_views.PasswordResetDoneView):
     '''
 
-    Password Reset Done
+    Завершение сброса старого пароля.
 
     '''
     template_name = 'registrations/password_reset_done.html'
@@ -214,7 +239,7 @@ class PasswordResetDoneView_(auth_views.PasswordResetDoneView):
 class PasswordResetConfirmView_(auth_views.PasswordResetConfirmView):
     '''
 
-    Cofirm Reset Password
+    Подтверждение сброса старого пароля.
 
     '''
     template_name = 'registrations/password_reset_confirm.html'
@@ -223,7 +248,7 @@ class PasswordResetConfirmView_(auth_views.PasswordResetConfirmView):
 class PasswordResetCompleteView_(auth_views.PasswordResetCompleteView):
     '''
 
-    Complete Reset Password
+    Полный сброс пароля.
 
     '''
     template_name = 'registrations/password_reset_complete.html'

@@ -6,7 +6,17 @@ from django.contrib.auth.models import User
 class UserForm(forms.Form):
     '''
 
-    User Form
+    Форма класса объекта пользователь
+
+    Содержит:
+
+    username - имя пользователя
+
+    email - электронная почта пользователя
+
+    password1 - пароль
+
+    password2 - пароль (для подтверждения)
 
     '''
     username = forms.CharField(label='Username', min_length=6, max_length=150, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Username'}))
@@ -16,11 +26,10 @@ class UserForm(forms.Form):
 
     def clean_username(self):
         '''
+        Функция проверки наличия имени пользователя.
 
-        Check if username is exist
+        Возвращает: имя пользователя, если оно уникально, иначе - ошибка.
 
-        :return: username if check ok,
-                 else raise error
         '''
         username = self.cleaned_data['username'].lower()
         r = User.objects.filter(username=username)
@@ -30,11 +39,10 @@ class UserForm(forms.Form):
 
     def clean_email(self):
         '''
+        Функция проверяет наличие введенной электронной почты пользователя.
 
-        Check if email is exist
+        Возвращает: ошибку при отсутствии почты, иначе электронную почту пользователя.
 
-        :return: email if check ok,
-                 else raise error
         '''
         email = self.cleaned_data['email'].lower()
         r = User.objects.filter(email=email)
@@ -44,12 +52,12 @@ class UserForm(forms.Form):
 
     def clean_password2(self):
         '''
+        Функция проверки пароля.
 
-        Check Password
-        Compare password with second password
+        Сравнивает два поля: пароль и  подтверждение пароля.
 
-        :return: passwork if check ok
-                 else raise error
+        Возвращает: пароль при успехе, иначе - ошибка.
+
         '''
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
@@ -62,9 +70,10 @@ class UserForm(forms.Form):
     def save(self, commit=True):
         '''
 
-        Save user to DB
+        Функция сохранения пользователя в базе данных.
 
-        :return: user object
+        Возвращает: объект "Пользователь"
+
         '''
         user = User.objects.create_user(
             self.cleaned_data['username'],
@@ -76,8 +85,8 @@ class UserForm(forms.Form):
 class UserInfoForm(forms.ModelForm):
 
     '''
-
-    Form for UserInfor Object
+    
+    Форма класса объекта профиля пользователя.
 
     '''
     class Meta:
