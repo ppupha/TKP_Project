@@ -58,3 +58,10 @@
 * framework: Django;
 * документация: Github;
 * база данных: SQLite;
+
+
+
+Ссылка на документацию приложения: https://ppupha.github.io/TKP_Project/docs/build/modules.html
+
+
+
