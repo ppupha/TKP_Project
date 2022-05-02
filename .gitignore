@@ -1,0 +1,5 @@
+/env/*
+*.pyc
+/.idea/*
+/taskmanager/db.sqlite3
+*/migrations/*

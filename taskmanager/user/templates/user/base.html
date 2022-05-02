@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}"> <!--load all styles -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <style>
+        .carousel-item {
+            height: 100vh;
+            min-height: 350px;
+            background: no-repeat center center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            }
+
+        p {
+            color: #4D8096;
+        }
+
+    </style>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% csrf_token %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container">
+       <div class="navbar-brand">
+           <a class="nav-link" style="color:black" href="{% url 'user:index' %}">Up-to-date</a>
+       </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'myuser:login'%}">Log in</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'myuser:signup'%}">Sign up</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user:help'%}">Help</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user:authors'%}">About us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% block content %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "task/base_left.html" %}
+
+{% block title %}
+    Task | {{ task.title }}
+{% endblock %}
+
+{% block contain-right %}
+    <p>{{ task.title }}</p>
+    <p>{{ task.description }}</p>
+{% endblock %}

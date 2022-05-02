@@ -1,0 +1,69 @@
+{% extends "task/base.html" %}
+{% load static %}
+{% block title %}Up-to-date{% endblock %}
+
+{% block contain %}
+<!--Information-->
+  <div class="jumbotron" style="margin-top: 80px">
+    <form method="POST" action="{% url 'user:user_profile'%}" enctype="multipart/form-data">{% csrf_token %}
+      <div class="row">
+        <!--Avatar form-->
+        <div class="col-sm-3">
+          <div class="text-center">
+            <img src="{{user.Info.user_avatar.url}}" width="200" height="200" class="rounded-circle" alt="avatar"></img>
+            <p class="py-1" data-toggle="collapse" data-target="#collapseForm">
+              <label for="id_user_avatar" class="custom-file-upload">Upload image</label>
+              {{form.user_avatar}}
+            </p>
+          </div>
+        </div>
+        <!--End avatar form-->
+        <!--Info form-->
+        <div class="col-lg-8">
+          <div class="container">
+            {% if user.Info.user_fullname %}
+              <h4 class="display-4">{{user.Info.user_fullname}}</h4>
+              <p style="word-break: break-word">{{user.Info.user_description}}</p>
+            {% else %}
+              <h4 class="display-4">{{user.username}}</h4>
+            {% endif %}
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm" style="background-color: #4d8096">
+              Edit profile »
+            </button>
+          </div>
+        <br><br>
+        <div class="collapse" id="collapseForm" data-toggle="collapse">
+          <div class="form-group">
+            <label for="id_user_fullname">Full Name</label>
+            {{form.user_fullname}}
+          </div>
+          <div class="form-group">
+            <label for="id_user_description">Description</label>
+            {{form.user_description}}
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+          <span></span>
+          <button type="reset" class="btn btn-info" data-toggle="collapse" data-target="#collapseForm" style="background-color: #4d8096">Cancel</button>
+        </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--Container-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-lg-8 pb-5">
+        <a href="{% url 'myuser:password_change' %}">Change you password</a>
+      </div>
+    </div>
+  </div>
+ <!-- /container -->
+  <script>
+    $('#id_user_avatar').change(function() {
+      var i = $(this).prev('label').clone();
+      var file = $('#id_user_avatar')[0].files[0].name.slice(-10,);
+      $(this).prev('label').text(file);
+    });
+  </script>
+{% endblock %}
