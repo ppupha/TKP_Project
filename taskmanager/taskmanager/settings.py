@@ -128,7 +128,7 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 MEDIA_URL = '/media/'
 LOGIN_URL = '/login/'
 
-if DEBUG:
+if 0:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
@@ -139,8 +139,8 @@ if DEBUG:
 else:
     EMAIL_USE_TLS = True
     EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_HOST_USER = 'nguyensangqh@gmail.com'
-    EMAIL_HOST_PASSWORD = 'acpxqqifcjkrddzx'
+    EMAIL_HOST_USER = 'nguyensanghso@gmail.com'
+    EMAIL_HOST_PASSWORD = 'ywvgoegumbcxledt'
     EMAIL_PORT = 587
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
