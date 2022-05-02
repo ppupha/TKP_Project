@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.sites.shortcuts import get_current_site
-
+from background_task import background
 
 
 
@@ -35,6 +35,40 @@ def send_mail_notif(task, msg, domain):
     # attach a HTML formatted email
     email.attach_alternative(html_content, 'text/html')
     email.send()
+
+def update_notif(domain = '', user = None):
+    if (user == None):
+        projects = project.objects.all()
+    else:
+        projects = user.project_set.all()
+
+    for project in projects:
+        # get all task of a projects
+        tasks = project.task_set.all()
+        for task in tasks:
+            if not task.done:
+                count += 1
+                # create a new Model
+                noti = Notification()
+                noti.task = task
+                # if closed to deadline 5 day
+                if (task.deadline - datetime.now(timezone.utc) - timedelta(hours=3) < timedelta(0)) and (
+                        task.noti[0] == '0'):
+                    noti.content = 'The deadline is already over'
+                    noti.save()
+                    task.noti = '1{}{}'.format(task.noti[1], task.noti[2])
+                    send_mail_notif(domain=domain, msg=noti.content, task = task)
+                # if out ò deadline
+                elif (timedelta(0) < task.deadline - datetime.now(timezone.utc) - timedelta(hours=3) < timedelta(
+                        days=5)) and (task.noti[1] == '0'):
+
+                    noti.content = '5 day left '
+                    noti.save()
+                    task.noti = task.noti[0] + '1' + task.noti[2]
+                    send_mail_notif(domain=domain, msg=noti.content, task = task)
+                task.save()
+    return count
+
 
 def make_noti(request):
     '''
