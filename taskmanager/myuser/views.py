@@ -83,7 +83,6 @@ class SignupView(View):
             current_site = get_current_site(request)
             mail_subject = 'Active your account.'
             to_email = user_form.cleaned_data.get('email')
-            from_email = "nguyennsangqh@gmail.com"
             html_content = get_template('registrations/acc_active_email.html').render({
                 'user': user,
                 'domain': current_site.domain,

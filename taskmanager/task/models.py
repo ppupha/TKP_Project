@@ -49,3 +49,13 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.task.title
+        
+    def getuser(self):
+        return self.task.project.user
+        
+    def get_user_mail(self):
+        return self.getuser().email
+        
+    def send_notif(self):
+        pass
+        

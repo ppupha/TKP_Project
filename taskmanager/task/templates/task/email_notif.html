@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+{% csrf_token %}
+<div style="background-color : #F8F9FA; border-radius : 5px; padding:0% 5%">
+    <p style="font-size:2em; font-family:freestyle script">Hi <span style="color:#4D8096">{{ username }}</span>,</p>
+    <p style="color:black">Your Task {{task.title}} in projects {{project.title}}</p>
+    <p style="color:black">{{ msg }}</p>
+    <a href="http://{{ domain }}{% url 'task:project' project.id %}">Link to your project</a>
+
+    <p style="color:black">Sincerely,</p>
+    <p style="font-size:1.5em; color:#4D8096; font-family:freestyle script">Up-To-Date</p>
+</div>
+
+
+</body>
+</html>

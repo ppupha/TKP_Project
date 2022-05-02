@@ -8,7 +8,33 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, decorators
 from datetime import timedelta, datetime, timezone
 from rest_framework.views import APIView
+from django.template.loader import get_template
+from django.core.mail import EmailMultiAlternatives
+from django.contrib.sites.shortcuts import get_current_site
 
+
+
+
+
+def send_mail_notif(task, msg, domain):
+    mail_subject = "Task Notif"
+    project = task.project
+    user = project.user
+    to_email = user.email
+    html_content = get_template('task/email_notif.html').render({
+        'username': user.username,
+        'msg': msg,
+        'task': task,
+        'project': project,
+        'domain': domain,
+    })
+
+    email = EmailMultiAlternatives(
+        mail_subject, '', to=[to_email]
+    )
+    # attach a HTML formatted email
+    email.attach_alternative(html_content, 'text/html')
+    email.send()
 
 def make_noti(request):
     '''
@@ -17,6 +43,8 @@ def make_noti(request):
     :return: number of notifications
     '''
     count = 0
+    current_site = get_current_site(request)
+    domain = current_site.domain
     # get all projects of a users
     projects = request.user.project_set.all()
     for project in projects:
@@ -34,6 +62,7 @@ def make_noti(request):
                     noti.content = 'The deadline is already over'
                     noti.save()
                     task.noti = '1{}{}'.format(task.noti[1], task.noti[2])
+                    send_mail_notif(domain=domain, msg=noti.content, task = task)
                 # if out ò deadline
                 elif (timedelta(0) < task.deadline - datetime.now(timezone.utc) - timedelta(hours=3) < timedelta(
                         days=5)) and (task.noti[1] == '0'):
@@ -41,6 +70,7 @@ def make_noti(request):
                     noti.content = '5 day left '
                     noti.save()
                     task.noti = task.noti[0] + '1' + task.noti[2]
+                    send_mail_notif(domain=domain, msg=noti.content, task = task)
                 task.save()
     return count
 
