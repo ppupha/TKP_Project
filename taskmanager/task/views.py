@@ -11,7 +11,6 @@ from rest_framework.views import APIView
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.sites.shortcuts import get_current_site
-from background_task import background
 
 
 
